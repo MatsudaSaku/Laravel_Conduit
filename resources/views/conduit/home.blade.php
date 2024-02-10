@@ -27,7 +27,31 @@
             </li>
           </ul>
         </div>
+        @foreach($conduit as $con)
+        <div class="article-preview">
+          <div class="article-meta">
+            <a href="/profile/eric-simons"><img src="http://i.imgur.com/Qr71crq.jpg" /></a>
+            <div class="info">
+              <a href="/profile/eric-simons" class="author">Eric Simons</a>
+              <span class="date">{{ \Carbon\Carbon::parse($con->timestamp)->format('F j, Y') }}</span>
+            </div>
+            <button class="btn btn-outline-primary btn-sm pull-xs-right">
+              <i class="ion-heart"></i> {{$con->heart}}
+            </button>
+          </div>
+          <a href="/article/how-to-build-webapps-that-scale" class="preview-link">
+            <h1>{{$con->headline}}</h1>
+            <p>{{$con->headline2}}</p>
+            <span>Read more...</span>
+            <ul class="tag-list">
+                @foreach(explode(':', $con->tags) as $tag)
+                    <li class="tag-default tag-pill tag-outline">{{ $tag }}</li>
+                @endforeach
+            </ul>
+          </a>
+        </div>
 
+        @endforeach
         <div class="article-preview">
           <div class="article-meta">
             <a href="/profile/eric-simons"><img src="http://i.imgur.com/Qr71crq.jpg" /></a>

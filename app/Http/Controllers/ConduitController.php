@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Conduit;
 use Illuminate\Http\Request;
 
 class ConduitController extends Controller
 {
     public function home()
     {
-        return view('conduit.home');
+        $Conduit = Conduit::all();
+        return view('conduit.home',['conduit' => $Conduit]);
     }
 
     public function register()

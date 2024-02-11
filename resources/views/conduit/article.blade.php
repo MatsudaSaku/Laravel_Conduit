@@ -16,11 +16,11 @@
         <a href="/profile/eric-simons"><img src="{{ asset('storage/demo-avatar.png') }}" /></a>
         <div class="info">
           <a href="/profile/eric-simons" class="author">{{$conduit->author}}</a>
-          <span class="date">January 20th</span>
+          <span class="date">{{ \Carbon\Carbon::parse($conduit->timestamp)->format('F j, Y') }}</span>
         </div>
         <button class="btn btn-sm btn-outline-secondary">
           <i class="ion-plus-round"></i>
-          &nbsp; Follow Eric Simons <span class="counter">(10)</span>
+          &nbsp; Follow {{$conduit->author}} <span class="counter">(10)</span>
         </button>
         &nbsp;&nbsp;
         <button class="btn btn-sm btn-outline-primary">
@@ -28,11 +28,17 @@
           &nbsp; Favorite Post <span class="counter">{{$conduit->heart}}</span>
         </button>
         <button class="btn btn-sm btn-outline-secondary">
-          <i class="ion-edit"></i> Edit Article
+        <a href="{{ route('article_editor', $conduit->id) }}" style="color: white;">
+    <i class="ion-edit"></i> Edit Article
+        </a>
         </button>
+
         <button class="btn btn-sm btn-outline-danger">
+        <a href="{{ route('delete', $conduit->id) }}" style="color: red;">
           <i class="ion-trash-a"></i> Delete Article
+        </a>
         </button>
+
       </div>
     </div>
   </div>

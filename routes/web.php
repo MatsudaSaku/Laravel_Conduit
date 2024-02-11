@@ -23,7 +23,13 @@ Route::get('/login',  [ConduitController::class, 'login'])->name('login');
 
 Route::get('/setting',  [ConduitController::class, 'setting'])->name('setting');
 
-Route::get('/editor',  [ConduitController::class, 'editor'])->name('editor');
+Route::get('/editor/{id}',  [ConduitController::class, 'article_editor'])->name('article_editor');
+
+Route::post('/update_editor/{id}',  [ConduitController::class, 'update_editor'])->name('update_editor');
+
+Route::post('/create',  [ConduitController::class, 'article_create'])->name('create');
+
+Route::get('/create',  [ConduitController::class, 'create']);
 
 Route::get('/editor/article-slug-here',  [ConduitController::class, 'editor/article'])->name('editor/article');
 
@@ -32,3 +38,5 @@ Route::get('/article/{headline}',  [ConduitController::class, 'article_headline'
 Route::get('/profile/:username',  [ConduitController::class, 'username'])->name('username');
 
 Route::get('/favorites',  [ConduitController::class, 'favorites'])->name('favorites');
+
+Route::get('/delete/{id}', [ConduitController::class, 'delete'])->name('delete');

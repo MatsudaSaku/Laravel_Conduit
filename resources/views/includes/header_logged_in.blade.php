@@ -7,7 +7,7 @@
                 <a class="nav-link active" href="/">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{route('editor')}}">
+                <a class="nav-link" href="{{route('create')}}">
                     <i class="ion-compose"></i>&nbsp;New Article
                 </a>
             </li>

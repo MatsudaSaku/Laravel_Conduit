@@ -28,9 +28,36 @@ class ConduitController extends Controller
         return view('conduit.setting');
     }
 
-    public function editor()
+    public function article_editor($id)
     {
-        return view('conduit.editor');
+        $article = Conduit::findOrFail($id);
+
+        return view('conduit.editor',['conduit' => $article]);
+    }
+
+    public function update_editor(Request $request, $id)
+{
+    $data = $request->validate([
+        'headline' => 'required|string|max:255',
+        'headline2' => 'required|string|max:255',
+        'text' => 'required|string',
+        'tags' => 'nullable|string',
+    ]);
+
+    $article = Conduit::findOrFail($id);
+
+    $article->headline = $data['headline'];
+    $article->headline2 = $data['headline2'];
+    $article->text = $data['text'];
+    $article->tags = $data['tags'];
+    $article->save();
+
+    return redirect()->route('home')->with('success', 'Article created successfully.');
+}
+
+    public function create()
+    {
+        return view('conduit.create');
     }
 
     public function article_headline($headline)
@@ -46,4 +73,35 @@ class ConduitController extends Controller
             return null;
         }
     }
+
+    public function delete($id)
+    {
+        $article = Conduit::findOrFail($id);
+    
+        $article->delete();
+
+        return redirect()->route('home'); 
+    }
+
+    public function article_create(Request $request)
+{
+    
+    $data = $request->validate([
+        'headline' => 'required|string|max:255',
+        'headline2' => 'required|string|max:255',
+        'text' => 'required|string',
+        'tags' => 'nullable|string',
+    ]);
+
+    
+    $article = new Conduit();
+    $article->headline = $data['headline'];
+    $article->headline2 = $data['headline2'];
+    $article->text = $data['text'];
+    $article->tags = $data['tags'];
+    $article->save();
+
+    
+    return redirect()->route('home')->with('success', 'Article created successfully.');
+}
 }

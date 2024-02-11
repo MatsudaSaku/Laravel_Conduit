@@ -14,24 +14,25 @@
           <li>That title is required</li>
         </ul>
 
-        <form method="POST" action="{{ route('update_editor',$conduit->id) }}">
+        <form method="POST" action="{{ route('create') }}">
         @csrf
           <fieldset>
             <fieldset class="form-group">
-              <input type="text" class="form-control form-control-lg" placeholder="Article Title" value="{{$conduit->headline}}"/>
+              <input type="text" class="form-control form-control-lg" name="headline" placeholder="Article Title" />
             </fieldset>
             <fieldset class="form-group">
-              <input type="text" class="form-control" placeholder="What's this article about?" value="{{$conduit->headline2}}"/>
+              <input type="text" class="form-control" name="headline2" placeholder="What's this article about?" />
             </fieldset>
             <fieldset class="form-group">
               <textarea
                 class="form-control"
+                name="text"
                 rows="8"
                 placeholder="Write your article (in markdown)"
-              >{{$conduit->text}}</textarea>
+              ></textarea>
             </fieldset>
             <fieldset class="form-group">
-              <input type="text" class="form-control" placeholder="Enter tags" value="{{$conduit->tags}}"/>
+              <input type="text" name="tags" class="form-control" placeholder="Enter tags" />
               <div class="tag-list">
                 <span class="tag-default tag-pill"> <i class="ion-close-round"></i> tag </span>
               </div>

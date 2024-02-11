@@ -52,7 +52,7 @@ class ConduitController extends Controller
     $article->tags = $data['tags'];
     $article->save();
 
-    return redirect()->route('home')->with('success', 'Article created successfully.');
+    return redirect()->route('home');
 }
 
     public function create()
@@ -102,6 +102,6 @@ class ConduitController extends Controller
     $article->save();
 
     
-    return redirect()->route('home')->with('success', 'Article created successfully.');
+    return redirect()->route('home');
 }
 }

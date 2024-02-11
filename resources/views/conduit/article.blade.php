@@ -75,10 +75,14 @@
           &nbsp; Favorite Article <span class="counter">{{$conduit->heart}}</span>
         </button>
         <button class="btn btn-sm btn-outline-secondary">
-          <i class="ion-edit"></i> Edit Article
+        <a href="{{ route('article_editor', $conduit->id) }}" style="color: white;">
+    <i class="ion-edit"></i> Edit Article
+        </a>
         </button>
         <button class="btn btn-sm btn-outline-danger">
+        <a href="{{ route('delete', $conduit->id) }}" style="color: red;">
           <i class="ion-trash-a"></i> Delete Article
+        </a>
         </button>
       </div>
     </div>

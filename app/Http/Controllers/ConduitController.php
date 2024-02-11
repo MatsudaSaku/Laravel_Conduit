@@ -9,8 +9,8 @@ class ConduitController extends Controller
 {
     public function home()
     {
-        $Conduit = Conduit::all();
-        return view('conduit.home',['conduit' => $Conduit]);
+        $conduit = Conduit::paginate(10);
+        return view('conduit.home',['conduit' => $conduit]);
     }
 
     public function register()
@@ -33,4 +33,17 @@ class ConduitController extends Controller
         return view('conduit.editor');
     }
 
+    public function article_headline($headline)
+    {
+        $conduit = Conduit::where('headline', $headline)->first();
+
+        
+        if ($conduit) {
+          
+            return view('conduit.article',['conduit' => $conduit]);
+        } else {
+           
+            return null;
+        }
+    }
 }

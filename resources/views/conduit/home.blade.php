@@ -1,9 +1,13 @@
+<head>
+     <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
 @extends('layouts.app')
 
 @if (Auth::check())
-    @include('includes.header_logged_in')
+  @include('includes.header_logged_in')
 @else
-    @include('includes.header')
+  @include('includes.header')
 @endif
 
 <div class="home-page">
@@ -30,16 +34,18 @@
         @foreach($conduit as $con)
         <div class="article-preview">
           <div class="article-meta">
-            <a href="/profile/eric-simons"><img src="http://i.imgur.com/Qr71crq.jpg" /></a>
+          <a href="/profile/eric-simons">
+            <img src="{{ asset('storage/demo-avatar.png') }}" alt="Image">
+          </a>
             <div class="info">
-              <a href="/profile/eric-simons" class="author">Eric Simons</a>
+              <a href="/profile/eric-simons" class="author">{{$con->author}}</a>
               <span class="date">{{ \Carbon\Carbon::parse($con->timestamp)->format('F j, Y') }}</span>
             </div>
             <button class="btn btn-outline-primary btn-sm pull-xs-right">
               <i class="ion-heart"></i> {{$con->heart}}
             </button>
           </div>
-          <a href="/article/how-to-build-webapps-that-scale" class="preview-link">
+          <a href="{{route('article_headline',$con->headline)}}" class="preview-link">
             <h1>{{$con->headline}}</h1>
             <p>{{$con->headline2}}</p>
             <span>Read more...</span>
@@ -52,58 +58,8 @@
         </div>
 
         @endforeach
-        <div class="article-preview">
-          <div class="article-meta">
-            <a href="/profile/eric-simons"><img src="http://i.imgur.com/Qr71crq.jpg" /></a>
-            <div class="info">
-              <a href="/profile/eric-simons" class="author">Eric Simons</a>
-              <span class="date">January 20th</span>
-            </div>
-            <button class="btn btn-outline-primary btn-sm pull-xs-right">
-              <i class="ion-heart"></i> 29
-            </button>
-          </div>
-          <a href="/article/how-to-build-webapps-that-scale" class="preview-link">
-            <h1>How to build webapps that scale</h1>
-            <p>This is the description for the post.</p>
-            <span>Read more...</span>
-            <ul class="tag-list">
-              <li class="tag-default tag-pill tag-outline">realworld</li>
-              <li class="tag-default tag-pill tag-outline">implementations</li>
-            </ul>
-          </a>
-        </div>
-
-        <div class="article-preview">
-          <div class="article-meta">
-            <a href="/profile/albert-pai"><img src="http://i.imgur.com/N4VcUeJ.jpg" /></a>
-            <div class="info">
-              <a href="/profile/albert-pai" class="author">Albert Pai</a>
-              <span class="date">January 20th</span>
-            </div>
-            <button class="btn btn-outline-primary btn-sm pull-xs-right">
-              <i class="ion-heart"></i> 32
-            </button>
-          </div>
-          <a href="/article/the-song-you" class="preview-link">
-            <h1>The song you won't ever stop singing. No matter how hard you try.</h1>
-            <p>This is the description for the post.</p>
-            <span>Read more...</span>
-            <ul class="tag-list">
-              <li class="tag-default tag-pill tag-outline">realworld</li>
-              <li class="tag-default tag-pill tag-outline">implementations</li>
-            </ul>
-          </a>
-        </div>
-
-        <ul class="pagination">
-          <li class="page-item active">
-            <a class="page-link" href="">1</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="">2</a>
-          </li>
-        </ul>
+        {{ $conduit->links() }}
+        
       </div>
 
       <div class="col-md-3">
@@ -125,5 +81,4 @@
     </div>
   </div>
 </div>
-
 @include('layouts.footer')

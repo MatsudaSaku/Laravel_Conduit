@@ -17,18 +17,18 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/',  [ConduitController::class, 'home'])->name('home');
 
-Route::get('/register ',  [ConduitController::class, 'register'])->name('register');
+Route::get('/register',  [ConduitController::class, 'register'])->name('register');
 
-Route::get('/login ',  [ConduitController::class, 'login'])->name('login');
+Route::get('/login',  [ConduitController::class, 'login'])->name('login');
 
-Route::get('/setting ',  [ConduitController::class, 'setting'])->name('setting');
+Route::get('/setting',  [ConduitController::class, 'setting'])->name('setting');
 
-Route::get('/editor ',  [ConduitController::class, 'editor'])->name('editor');
+Route::get('/editor',  [ConduitController::class, 'editor'])->name('editor');
 
-Route::get('/editor/article-slug-here ',  [ConduitController::class, 'editor/article'])->name('editor/article');
+Route::get('/editor/article-slug-here',  [ConduitController::class, 'editor/article'])->name('editor/article');
 
-Route::get('/article/article-slug-here ',  [ConduitController::class, 'article/article'])->name('article/article');
+Route::get('/article/{headline}',  [ConduitController::class, 'article_headline'])->name('article_headline');
 
-Route::get('/profile/:username ',  [ConduitController::class, 'username'])->name('username');
+Route::get('/profile/:username',  [ConduitController::class, 'username'])->name('username');
 
-Route::get('/favorites ',  [ConduitController::class, 'favorites'])->name('favorites');
+Route::get('/favorites',  [ConduitController::class, 'favorites'])->name('favorites');

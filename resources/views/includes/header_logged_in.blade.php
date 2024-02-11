@@ -7,12 +7,12 @@
                 <a class="nav-link active" href="/">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/editor">
+                <a class="nav-link" href="{{route('editor')}}">
                     <i class="ion-compose"></i>&nbsp;New Article
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/settings">
+                <a class="nav-link" href="{{route('setting')}}">
                     <i class="ion-gear-a"></i>&nbsp;Settings
                 </a>
             </li>

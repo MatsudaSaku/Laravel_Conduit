@@ -5,9 +5,9 @@
 @extends('layouts.app')
 
 @if (Auth::check())
-@include('includes.header')
+@include('includes.header_logged_in')
 @else
-  @include('includes.header_logged_in')
+@include('includes.header')
 @endif
 
 <div class="home-page">

@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Hash;
 use App\Models\Conduit;
 use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class ConduitController extends Controller
 {
@@ -78,13 +82,13 @@ class ConduitController extends Controller
     {
         $article = Conduit::findOrFail($id);
     
-        $article->delete();
+        $article->forceDelete();
 
         return redirect()->route('home'); 
     }
 
     public function article_create(Request $request)
-{
+    {
     
     $data = $request->validate([
         'headline' => 'required|string|max:255',
@@ -103,5 +107,52 @@ class ConduitController extends Controller
 
     
     return redirect()->route('home');
-}
+    }
+
+    public function register_create(Request $request)
+    {
+        $data = $request->validate([
+            'username' => 'required|string|max:255',
+            'email' => 'required|string|max:255',
+            'password' => 'required|string',
+        ]);
+        $password = $data['password'];
+
+        $user = new User();
+        $user->name = $data['username'];
+        $user->email = $data['email'];
+        $user->password = Hash::make($password);
+        $user->save();
+
+        return redirect()->route('home');
+    }
+
+    public function login_auth(Request $request)
+    {
+
+        $credentials = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+    
+        if (Auth::attempt($credentials)) {
+            Log::info('attempt()通りました。');
+            $request->session()->regenerate(); 
+            return redirect()->intended('/'); 
+        }
+    
+        else{
+            return back()->withErrors([
+                'email' => '入力いただいた情報と合致するデータがありません。',
+            ]);
+        }
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout(); // ログアウトする
+        $request->session()->invalidate(); // セッションを無効化する
+        $request->session()->regenerateToken(); // 新しい CSRF トークンを生成する
+        return redirect('/login'); // ログアウト後はログインページにリダイレクトする
+    }
 }

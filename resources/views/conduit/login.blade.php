@@ -16,18 +16,25 @@
           <a href="/register">Need an account?</a>
         </p>
 
-        <ul class="error-messages">
-          <li>That email is already taken</li>
+        @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
         </ul>
+    </div>
+@endif
 
-        <form>
+        <form method="post" action="{{route('login_auth')}}">
+        @csrf
           <fieldset class="form-group">
-            <input class="form-control form-control-lg" type="text" placeholder="Email" />
+            <input name="email" class="form-control form-control-lg" type="text" placeholder="Email" />
           </fieldset>
           <fieldset class="form-group">
-            <input class="form-control form-control-lg" type="password" placeholder="Password" />
+            <input name="password" class="form-control form-control-lg" type="password" placeholder="Password" />
           </fieldset>
-          <button class="btn btn-lg btn-primary pull-xs-right">Sign in</button>
+          <button type="submit" class="btn btn-lg btn-primary pull-xs-right">Sign in</button>
         </form>
       </div>
     </div>

@@ -45,7 +45,10 @@
           </fieldset>
         </form>
         <hr />
-        <button class="btn btn-outline-danger">Or click here to logout.</button>
+        <form id="logout-form" method="POST" action="{{ route('logout') }}" >
+        @csrf
+          <button type="submit" class="btn btn-outline-danger">Logout</button>
+        </form>
       </div>
     </div>
   </div>
